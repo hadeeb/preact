@@ -33,6 +33,7 @@ declare namespace React {
 	export import Component = preact.Component;
 	export import FunctionComponent = preact.FunctionComponent;
 	export import FC = preact.FunctionComponent;
+	export import ComponentClass = preact.ComponentClass;
 	export import createContext = preact.createContext;
 	export import createRef = preact.createRef;
 	export import Fragment = preact.Fragment;
@@ -83,7 +84,7 @@ declare namespace React {
 		isPureReactComponent: boolean;
 	}
 
-	export function memo<C extends preact.FunctionalComponent<any>>(
+	export function memo<C extends preact.ComponentType<any>>(
 		component: C,
 		comparer?: (
 			prev: preact.ComponentProps<C>,

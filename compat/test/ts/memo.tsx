@@ -18,6 +18,17 @@ const BaseComponent = (props: MemoProps) => (
 );
 BaseComponent.defaultProps = { defaulted: '' };
 
+class BaseClassComponent extends React.Component<MemoProps> {
+	render() {
+		return (
+			<div>
+				{this.props.required + this.props.optional + this.props.defaulted}
+			</div>
+		);
+	}
+	static defaultProps = { defaulted: '' };
+}
+
 // memo for readonly component with default comparison
 const MemoedReadonlyComponent = React.memo(ReadonlyBaseComponent);
 ExpectType<React.FunctionComponent<MemoProps>>(MemoedReadonlyComponent);
@@ -38,3 +49,8 @@ const CustomMemoedComponent = React.memo(BaseComponent, (a, b) => {
 });
 ExpectType<React.FunctionComponent<MemoProps>>(CustomMemoedComponent);
 export const customMemoedComponent = <CustomMemoedComponent required="hi" />;
+
+// memo for class components
+const MemoedClassComponent = React.memo(BaseClassComponent);
+ExpectType<React.ComponentClass<MemoProps>>(MemoedClassComponent);
+export const memoedClassComponent = <CustomMemoedComponent required="hi" />;
